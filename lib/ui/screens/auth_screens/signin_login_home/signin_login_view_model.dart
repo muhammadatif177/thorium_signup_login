@@ -1,11 +1,14 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:local_auth/local_auth.dart';
 import 'package:thorium/core/models/appUser.dart';
 import 'package:thorium/core/services/auth_service.dart';
 import 'package:thorium/core/view_models/base_view_model.dart';
 import 'package:thorium/ui/screens/home/home_screen.dart';
 
+import '../../../../core/enums/support_state.dart';
 import '../../../../core/enums/view_state.dart';
 import '../../../../core/models/custom_auth_result.dart';
 import '../../../../core/services/database_service.dart';
@@ -21,9 +24,30 @@ class SigninLoginViewModel extends BaseViewModel {
   final formKey = GlobalKey<FormState>();
   CustomAuthResult _authResult = CustomAuthResult();
   String? verifyPassword;
-
   bool isShow = false;
-  // final _authService = locator<AuthService>();
+  final _auth = LocalAuthentication();
+
+  Future<bool> hasBiometrics() async {
+    try {
+      return await _auth.canCheckBiometrics;
+    } on PlatformException catch (e) {
+      return false;
+    }
+  }
+
+  Future<bool> authenticate() async {
+    final isAvailable = await hasBiometrics();
+    if (!isAvailable) return false;
+    try {
+      return _auth.authenticateWithBiometrics(
+        localizedReason: 'Scan Finger Print to Authenticate',
+        useErrorDialogs: true,
+        stickyAuth: true,
+      );
+    } on PlatformException catch (e) {
+      return false;
+    }
+  }
 
   selectTab(bool val) {
     isSelected = val;
