@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:thorium/core/constant/colors.dart';
 import 'package:thorium/core/constant/strings.dart';
 import 'package:thorium/core/constant/style.dart';
 import 'package:thorium/ui/custom_widgets/custom_text_field.dart';
 import 'package:thorium/ui/screens/auth_screens/signin_login_home/signin_login_view_model.dart';
+import 'package:thorium/ui/screens/home/home_screen.dart';
 
 class SignInScreen extends StatelessWidget {
   static final formKey = GlobalKey<FormState>();
@@ -177,6 +179,30 @@ class SignInScreen extends StatelessWidget {
                   child: Center(
                       child: Text(
                     'Sign In',
+                    style: buttonTextStyle.copyWith(
+                        letterSpacing: .5,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700),
+                  )),
+                ),
+              ),
+              const SizedBox(height: 14),
+
+              GestureDetector(
+                onTap: () async {
+                  final isAuthenticated = await model.authenticate();
+                  if (isAuthenticated) {
+                    Get.offAll(HomeScreen());
+                  }
+                },
+                child: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  decoration: BoxDecoration(
+                      color: submitButtonColor,
+                      borderRadius: BorderRadius.circular(8)),
+                  child: Center(
+                      child: Text(
+                    'Use finger for sign in',
                     style: buttonTextStyle.copyWith(
                         letterSpacing: .5,
                         fontSize: 16,
