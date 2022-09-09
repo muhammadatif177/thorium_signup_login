@@ -192,7 +192,10 @@ class SignInScreen extends StatelessWidget {
                 onTap: () async {
                   final isAuthenticated = await model.authenticate();
                   if (isAuthenticated) {
-                    Get.offAll(HomeScreen());
+                    model.appUser.email = model.localStorageService.getEmail;
+                    model.appUser.password =
+                        model.localStorageService.getPassword;
+                    model.loginWithEmailAndPassword();
                   }
                 },
                 child: Container(
@@ -209,7 +212,8 @@ class SignInScreen extends StatelessWidget {
                         fontWeight: FontWeight.w700),
                   )),
                 ),
-              )
+              ),
+              const SizedBox(height: 14),
             ],
           ),
         );

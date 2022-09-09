@@ -117,7 +117,8 @@ class RegisterScreen extends StatelessWidget {
                         fontWeight: FontWeight.w700),
                   )),
                 ),
-              )
+              ),
+              const SizedBox(height: 30),
             ],
           ),
         );

@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:thorium/core/models/appUser.dart';
 import 'package:thorium/core/services/auth_service.dart';
+import 'package:thorium/core/services/local_storage_service.dart';
 import 'package:thorium/core/view_models/base_view_model.dart';
 import 'package:thorium/ui/screens/home/home_screen.dart';
 
@@ -19,6 +20,7 @@ class SigninLoginViewModel extends BaseViewModel {
   bool isSelected = false;
   AppUser appUser = AppUser();
   final _authService = locator<AuthService>();
+  final localStorageService = locator<LocalStorageService>();
 
   final _dbService = locator<DatabaseService>();
   // final formKey = GlobalKey<FormState>();

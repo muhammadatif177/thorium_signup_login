@@ -24,7 +24,7 @@ class SignupLoginHome extends StatelessWidget {
               child: Scaffold(
                 body: SingleChildScrollView(
                   child: Container(
-                    height: MediaQuery.of(context).size.height,
+                    // height: MediaQuery.of(context).size.height,
                     decoration: const BoxDecoration(
                         image: DecorationImage(
                           image: AssetImage(
