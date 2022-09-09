@@ -3,11 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:thorium/core/models/appUser.dart';
 import 'package:thorium/core/services/auth_exception_service.dart';
 import 'package:thorium/core/services/database_service.dart';
+import 'package:thorium/core/services/local_storage_service.dart';
+import 'package:thorium/locator.dart';
 
 import '../models/custom_auth_result.dart';
 
 class AuthService extends ChangeNotifier {
   final _dbService = DatabaseService();
+  final _localStorageService = locator<LocalStorageService>();
   final _auth = FirebaseAuth.instance;
   CustomAuthResult customAuthResult = CustomAuthResult();
   User? user;
@@ -16,13 +19,14 @@ class AuthService extends ChangeNotifier {
 
   init() async {
     user = _auth.currentUser;
+
     if (user != null) {
       isLogin = true;
-
       appUser = (await _dbService.getAppUser(user!.uid));
     } else {
       isLogin = false;
     }
+    // isLogin = false;
   }
 
   /// [SignUp] with email and password function
@@ -43,6 +47,8 @@ class AuthService extends ChangeNotifier {
       }
 
       if (credentials.user != null) {
+        _localStorageService.getEmail = appUser.email ?? '';
+        _localStorageService.getPassword = appUser.password ?? '';
         customAuthResult.status = true;
         customAuthResult.user = credentials.user;
         appUser.id = credentials.user!.uid;

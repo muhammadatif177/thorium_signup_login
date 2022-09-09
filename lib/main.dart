@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:thorium/locator.dart';
 import 'package:thorium/ui/screens/auth_screens/signin_login_home/signin_login_home_screen.dart';
+import 'package:thorium/ui/screens/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: SignupLoginHome(),
+      home: SplashScreen(),
     );
   }
 }
