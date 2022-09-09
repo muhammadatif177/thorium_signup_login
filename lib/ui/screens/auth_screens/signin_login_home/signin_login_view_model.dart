@@ -21,7 +21,7 @@ class SigninLoginViewModel extends BaseViewModel {
   final _authService = locator<AuthService>();
 
   final _dbService = locator<DatabaseService>();
-  final formKey = GlobalKey<FormState>();
+  // final formKey = GlobalKey<FormState>();
   CustomAuthResult _authResult = CustomAuthResult();
   String? verifyPassword;
   bool isShow = false;
