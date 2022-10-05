@@ -2,7 +2,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:thorium/locator.dart';
-import 'package:thorium/ui/screens/auth_screens/signin_login_home/signin_login_home_screen.dart';
 import 'package:thorium/ui/screens/splash_screen.dart';
 
 void main() async {
@@ -20,7 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Thorium',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
