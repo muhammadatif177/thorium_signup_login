@@ -18,7 +18,7 @@ class AuthService extends ChangeNotifier {
   AppUser appUser = AppUser();
 
   init() async {
-    user = _auth.currentUser;
+    user = null; //_auth.currentUser;
 
     if (user != null) {
       isLogin = true;
